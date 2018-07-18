@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>@yield('title')@if(request()->path() !== '/') -  $config['WEB_TITLE']  @endif</title>
+    <title>@yield('title')@if(request()->path() !== '/') -  {{$config['WEB_TITLE']}} @endif</title>
     <meta name="keywords" content="@yield('keywords')" />
     <meta name="description" content="@yield('description')" />
     <meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -48,11 +48,11 @@
                 <li class="b-nav-cname @if($category_id == 'chat') b-nav-active @endif">
                 <a href="{{ url('chat') }}">随言碎语</a>
                 </li>
-                @if(!$gitProject->isEmpty())
-                    <li class="b-nav-cname hidden-sm  @if($category_id == 'git') b-nav-active @endif">
-                    <a href="{{ url('git') }}">开源项目</a>
-                    </li>
-                @endif
+                {{--@if(!$gitProject->isEmpty())--}}
+                    {{--<li class="b-nav-cname hidden-sm  @if($category_id == 'git') b-nav-active @endif">--}}
+                    {{--<a href="{{ url('git') }}">开源项目</a>--}}
+                    {{--</li>--}}
+                {{--@endif--}}
             </ul>
             <ul id="b-login-word" class="nav navbar-nav navbar-right">
                 @if(empty(session('user.name')))
@@ -86,32 +86,32 @@
                     <input class="b-search-submit" type="submit" value="全站搜索">
                 </form>
             </div>
-            @if(!empty($config['QQ_QUN_NUMBER']))
-                <div class="b-qun">
-                    <h4 class="b-title">加入组织</h4>
-                    <ul class="b-all-tname">
-                        <li class="b-qun-or-code">
-                            <img src="{{ asset($config['QQ_QUN_OR_CODE']) }}" alt="QQ">
-                        </li>
-                        <li class="b-qun-word">
-                            <p class="b-qun-nuber">
-                                1. 手Q扫左侧二维码
-                            </p>
-                            <p class="b-qun-nuber">
-                                2. 搜Q群：{{ $config['QQ_QUN_NUMBER'] }}
-                            </p>
-                            <p class="b-qun-code">
-                                3. 点击{!! $config['QQ_QUN_CODE'] !!}
-                            </p>
-                            <p class="b-qun-article">
-                                @if(!empty($qqQunArticle['id']))
-                                    <a href="{{ url('article', [$qqQunArticle['id']]) }}" target="_blank">{{ $qqQunArticle['title'] }}</a>
-                                @endif
-                            </p>
-                        </li>
-                    </ul>
-                </div>
-            @endif
+            {{--@if(!empty($config['QQ_QUN_NUMBER']))--}}
+                {{--<div class="b-qun">--}}
+                    {{--<h4 class="b-title">加入组织</h4>--}}
+                    {{--<ul class="b-all-tname">--}}
+                        {{--<li class="b-qun-or-code">--}}
+                            {{--<img src="{{ asset($config['QQ_QUN_OR_CODE']) }}" alt="QQ">--}}
+                        {{--</li>--}}
+                        {{--<li class="b-qun-word">--}}
+                            {{--<p class="b-qun-nuber">--}}
+                                {{--1. 手Q扫左侧二维码--}}
+                            {{--</p>--}}
+                            {{--<p class="b-qun-nuber">--}}
+                                {{--2. 搜Q群：{{ $config['QQ_QUN_NUMBER'] }}--}}
+                            {{--</p>--}}
+                            {{--<p class="b-qun-code">--}}
+                                {{--3. 点击{!! $config['QQ_QUN_CODE'] !!}--}}
+                            {{--</p>--}}
+                            {{--<p class="b-qun-article">--}}
+                                {{--@if(!empty($qqQunArticle['id']))--}}
+                                    {{--<a href="{{ url('article', [$qqQunArticle['id']]) }}" target="_blank">{{ $qqQunArticle['title'] }}</a>--}}
+                                {{--@endif--}}
+                            {{--</p>--}}
+                        {{--</li>--}}
+                    {{--</ul>--}}
+                {{--</div>--}}
+            {{--@endif--}}
             <div class="b-tags">
                 <h4 class="b-title">热门标签</h4>
                 <ul class="b-all-tname">
@@ -125,14 +125,14 @@
                     @endforeach
                 </ul>
             </div>
-            <div class="b-recommend">
-                <h4 class="b-title">置顶推荐</h4>
-                <p class="b-recommend-p">
-                    @foreach($topArticle as $v)
-                        <a class="b-recommend-a" href="{{ url('article', [$v->id]) }}" target="_blank"><span class="fa fa-th-list b-black"></span> {{ $v->title }}</a>
-                    @endforeach
-                </p>
-            </div>
+            {{--<div class="b-recommend">--}}
+                {{--<h4 class="b-title">置顶推荐</h4>--}}
+                {{--<p class="b-recommend-p">--}}
+                    {{--@foreach($topArticle as $v)--}}
+                        {{--<a class="b-recommend-a" href="{{ url('article', [$v->id]) }}" target="_blank"><span class="fa fa-th-list b-black"></span> {{ $v->title }}</a>--}}
+                    {{--@endforeach--}}
+                {{--</p>--}}
+            {{--</div>--}}
             <div class="b-comment-list">
                 <h4 class="b-title">最新评论</h4>
                 <div>
@@ -167,9 +167,9 @@
         <!-- 通用底部文件开始 -->
         <footer id="b-foot" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <ul>
-                <li class="text-center">
-                    本博客使用免费开源的 <a rel="nofollow" href="https://github.com/baijunyao/laravel-bjyblog" target="_blank">laravel-blog</a> {{ config('blog.version') }}-{{ config('blog.branch') }} 搭建 © 2014-2018 {{ parse_url(config('app.url'))['host'] }} 版权所有 @if(!empty($config['WEB_ICP_NUMBER'])) ICP证：{{ $config['WEB_ICP_NUMBER'] }} @endif
-                </li>
+                {{--<li class="text-center">--}}
+                    {{--本博客使用免费开源的 <a rel="nofollow" href="https://github.com/baijunyao/laravel-bjyblog" target="_blank">laravel-blog</a> {{ config('blog.version') }}-{{ config('blog.branch') }} 搭建 © 2014-2018 {{ parse_url(config('app.url'))['host'] }} 版权所有 @if(!empty($config['WEB_ICP_NUMBER'])) ICP证：{{ $config['WEB_ICP_NUMBER'] }} @endif--}}
+                {{--</li>--}}
                 <li class="text-center">
                     @if(!empty($config['ADMIN_EMAIL']))
                         联系邮箱：{!! $config['ADMIN_EMAIL'] !!}

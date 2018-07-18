@@ -208,7 +208,10 @@ class IndexController extends Controller
     /**
      * 文章评论
      *
+     * @param Store $request
      * @param Comment $commentModel
+     * @param OauthUser $oauthUserModel
+     * @return \Illuminate\Http\JsonResponse
      */
     public function comment(Store $request, Comment $commentModel, OauthUser $oauthUserModel)
     {
@@ -257,7 +260,9 @@ class IndexController extends Controller
      */
     public function search(Request $request){
         $wd = clean($request->input('wd'));
+//        dd($wd);
         $raw = Article::search($wd)->raw();
+//        $raw = Article::search($wd)->get()->toArray();
         // 获取文章列表数据
         $article = Article::select('id', 'category_id', 'title', 'author', 'description', 'cover', 'created_at')
             ->whereIn('id', $raw['ids'])
